@@ -1,1 +1,25 @@
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
 
+function showSlides(n) {
+  slides.forEach((s, i) => s.classList.remove('active'));
+  slides[n].classList.add('active');
+  counter.textContent = `${n+1}/${slides.length}`;
+}
+
+function plusSlides(n) {
+  slideIndex += n;
+  if(slideIndex >= slides.length) slideIndex = 0;
+  if(slideIndex < 0) slideIndex = slides.length - 1;
+  showSlides(slideIndex);
+}
+
+showSlides(slideIndex);
+
+function showTab(tab) {
+  document.getElementById('photos').style.display = (tab==='photos') ? 'block' : 'none';
+  document.getElementById('meteo').style.display = (tab==='meteo') ? 'block' : 'none';
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab[onclick="showTab('${tab}')"]`).classList.add('active');
+}
